@@ -26,13 +26,14 @@ def get_point(image,Target,value):
     threshold = value
     loc = np.where( res >= threshold)
     # print(loc)
+    result=''
     for pt in zip(*loc[::-1]):
-        print(pt)
+        result=pt
+    return result
 
+# mathc_img('./current_img.jpg','./pointB.jpg',0.8)
 
-
-
-image=("test_2_a.jpg")
-Target=('test_2_b.jpg')
-value=0.4
-get_point(image,Target,value)
+# image=("test_2_a.jpg")
+# Target=('test_2_b.jpg')
+# value=0.4
+# print(get_point(image,Target,value))
