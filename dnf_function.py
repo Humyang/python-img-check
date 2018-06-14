@@ -11,8 +11,10 @@ def charct_to_pic(img_path,offsetX,offsetY):
     # 计算出需要行走的像素
     #生成人物行走的代码
     run_to_point(bd)
-    
-# 计算两个图片在主图的距离
+
+
+
+# 计算两个图片在主图之中相距的距离
 def between_distance(parentImg,pointA,pointB):
     print(parentImg,pointA)
     pa=picture.get_point(parentImg,pointA,0.8)
@@ -22,7 +24,7 @@ def between_distance(parentImg,pointA,pointB):
     my=pb[1]-pa[1]
     return (mx,my)
     # return 0
-    
+
 
 def run_to_point(m):
     # 获取变量：每毫秒移动的像素值
@@ -49,4 +51,3 @@ def move_y(value):
         # 小于 0 则往下移动
 
 charct_to_pic('./pointB.jpg',100,200)
-
