@@ -16,7 +16,7 @@ def charct_to_pic(img_path,offsetX,offsetY):
 
 # 计算两个图片在主图之中相距的距离
 def between_distance(parentImg,pointA,pointB):
-    print(parentImg,pointA)
+    # print(parentImg,pointA)
     pa=picture.get_point(parentImg,pointA,0.8)
     pb=picture.get_point(parentImg,pointB,0.8)
     # print(pb[0]-pa[0],pb[1]-pa[1])
@@ -24,6 +24,7 @@ def between_distance(parentImg,pointA,pointB):
     my=pb[1]-pa[1]
     return (mx,my)
     # return 0
+
 
 
 def run_to_point(m):
@@ -50,4 +51,4 @@ def move_y(value):
         print('按住下箭头',value /move_on_mil,'毫秒')
         # 小于 0 则往下移动
 
-charct_to_pic('./pointB.jpg',100,200)
+# charct_to_pic('./pointB.jpg',100,200)
