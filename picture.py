@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+import handle
 # 在image匹配Target，并且画一个框框标注
 def mathc_img(image,Target,value):
     img_rgb = cv2.imread(image)
@@ -33,9 +33,11 @@ def get_point(image,Target,value):
     return result
 
 # 屏幕截图
-# def screen_catch():
+def screen_catch():
     # 获取目标窗口坐标
+    rect=handle.get_window_info('无标题 - 画图')
     # 截取指定位置图片，保存在临时文件夹
+    
     # 返回截图文件路径
 
 # mathc_img('./current_img.jpg','./pointB.jpg',0.8)
