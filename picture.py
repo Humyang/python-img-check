@@ -58,7 +58,6 @@ def screen_catch():
     # 获取目标窗口坐标
     rect=handle.get_window_info('无标题 - 画图')
     # 截取指定位置图片，保存在临时文件夹
-    
     # 返回截图文件路径
 
 # mathc_img('./temp_screen/2018615233215.jpg','./temp_screen/pointA.jpg',0.4)
@@ -67,4 +66,5 @@ def screen_catch():
 # Target=('test_2_b.jpg')
 # value=0.4
 
+# print(get_target_on_screen_point('./temp_screen/pointA.jpg',0.6))
 # print(get_point(image,Target,value))
