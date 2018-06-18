@@ -54,35 +54,47 @@ def get_target_on_screen_point(Target,value):
     
     return result
 
-def match_multiple(img_gray,Target):
+def match_multiple(img_gray,Target,value):
     template = cv2.imread(Target,0)
     w, h = template.shape[::-1]
     res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
-    threshold = 0.5
+    threshold = value
     loc = np.where( res >= threshold)
     # print(loc)
-    result=''
+    result=(-1,-1)
     for pt in zip(*loc[::-1]):
         result=pt
     return result
+    
+def get_image_gray():
+    image = pyautogui.screenshot()
+    img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
+    return img_gray
 
-import datetime
-print(datetime.datetime.now())
-image = pyautogui.screenshot()
-img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
-print(datetime.datetime.now())
-m1=match_multiple(img_gray,'../script/map1/img/a.jpg')
-print(m1)
-print(datetime.datetime.now())
-m2=match_multiple(img_gray,'../script/map1/img/b.jpg')
-print(m2)
-print(datetime.datetime.now())
-print(match_multiple(img_gray,'../script/map1/img/c.jpg'))
-print(datetime.datetime.now())
-print(match_multiple(img_gray,'../script/map1/img/d.jpg'))
-print(match_multiple(img_gray,'../script/map1/img/e.jpg'))
-print(match_multiple(img_gray,'../script/map1/img/f.jpg'))
-print(datetime.datetime.now())
+def test():
+    image = pyautogui.screenshot()
+    img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
+    m2=match_multiple(img_gray,'../script/map1/img/pick_map_stage_add.jpg',0.6)
+    print(m2)
+
+
+# test()
+# import datetime
+# print(datetime.datetime.now())
+
+# print(datetime.datetime.now())
+# m1=match_multiple(img_gray,'../script/map1/img/a.jpg')
+# print(m1)
+# print(datetime.datetime.now())
+# m2=match_multiple(img_gray,'../script/map1/img/b.jpg')
+# print(m2)
+# print(datetime.datetime.now())
+# print(match_multiple(img_gray,'../script/map1/img/c.jpg'))
+# print(datetime.datetime.now())
+# print(match_multiple(img_gray,'../script/map1/img/d.jpg'))
+# print(match_multiple(img_gray,'../script/map1/img/e.jpg'))
+# print(match_multiple(img_gray,'../script/map1/img/f.jpg'))
+# print(datetime.datetime.now())
 # print(match_multiple(img_gray,'../script/map1/img/g.jpg'))
 # mathc_img('./temp_screen/2018615233215.jpg','./temp_screen/pointA.jpg',0.4)
 # print(get_point('./temp_screen/2018615235658.jpg','./temp_screen/pointA.jpg',0.4))

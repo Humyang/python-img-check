@@ -8,6 +8,7 @@ import win32com.client
 dm = win32com.client.Dispatch('dm.dmsoft')
 import time
 import datetime
+import reg
 #计算移动距离因子
 def get_distance_var():
     # 截图，获取人物当前位置
