@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import handle
+# import handle
 # 在image匹配Target，并且画一个框框标注
 def mathc_img(image,Target,value):
     img_rgb = cv2.imread(image)
@@ -54,7 +54,36 @@ def get_target_on_screen_point(Target,value):
     
     return result
 
+def match_multiple(img_gray,Target):
+    template = cv2.imread(Target,0)
+    w, h = template.shape[::-1]
+    res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
+    threshold = 0.5
+    loc = np.where( res >= threshold)
+    # print(loc)
+    result=''
+    for pt in zip(*loc[::-1]):
+        result=pt
+    return result
 
+import datetime
+print(datetime.datetime.now())
+image = pyautogui.screenshot()
+img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
+print(datetime.datetime.now())
+m1=match_multiple(img_gray,'../script/map1/img/a.jpg')
+print(m1)
+print(datetime.datetime.now())
+m2=match_multiple(img_gray,'../script/map1/img/b.jpg')
+print(m2)
+print(datetime.datetime.now())
+print(match_multiple(img_gray,'../script/map1/img/c.jpg'))
+print(datetime.datetime.now())
+print(match_multiple(img_gray,'../script/map1/img/d.jpg'))
+print(match_multiple(img_gray,'../script/map1/img/e.jpg'))
+print(match_multiple(img_gray,'../script/map1/img/f.jpg'))
+print(datetime.datetime.now())
+# print(match_multiple(img_gray,'../script/map1/img/g.jpg'))
 # mathc_img('./temp_screen/2018615233215.jpg','./temp_screen/pointA.jpg',0.4)
 # print(get_point('./temp_screen/2018615235658.jpg','./temp_screen/pointA.jpg',0.4))
 # image=("test_2_a.jpg")
