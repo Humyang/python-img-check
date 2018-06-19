@@ -54,7 +54,7 @@ def get_target_on_screen_point(Target,value):
     
     return result
 
-def match_multiple(img_gray,Target,value):
+def match_multiple(img_gray,Target,value=0.8):
     template = cv2.imread(Target,0)
     w, h = template.shape[::-1]
     res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
@@ -64,7 +64,11 @@ def match_multiple(img_gray,Target,value):
     result=(-1,-1)
     for pt in zip(*loc[::-1]):
         result=pt
-    return result
+    
+    if result==(-1,-1):
+        return False
+    else:
+        return result
     
 def get_image_gray():
     image = pyautogui.screenshot()

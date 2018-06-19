@@ -16,10 +16,10 @@ offsetY=0,
 clickNum=1,
 sleepTime=500):
     pick_map=picture.match_multiple(img_gray,target,value)
-    if pick_map!=None:
-        print(target)
-        print(pick_map)
-        print(pick_map[0]+offsetX,pick_map[1]+offsetY)
+    if pick_map!=False:
+        # print(target)
+        # print(pick_map)
+        # print(pick_map[0]+offsetX,pick_map[1]+offsetY)
         dm.MoveTo(pick_map[0]+offsetX,pick_map[1]+offsetY)
         for clickIndex in range(clickNum):
             print('click')
