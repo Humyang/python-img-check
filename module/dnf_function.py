@@ -9,11 +9,22 @@ dm.Reg(reg.getRegCode(),"")
 move_on_milX=0.486 #每毫秒移动20像素
 move_on_milY=0.32
 #人物行走到指定图片位置
-def charct_to_pic(point,offsetX=0,offsetY=0):
-    char_img='./temp_screen/pointA.jpg'# 角色关键图
+def charct_to_pic(char_img,point,offsetX=0,offsetY=0):
+    # char_img='../temp_screen/pointA.jpg'# 角色关键图
+    print(char_img,point)
     bd=between_distance(char_img,point)
-    bb=bd[0]+offsetX
-    bc=bd[1]+offsetY
+    if bd==False:
+        return False
+        
+    if bd[0]>0:
+        bb=bd[0]+offsetX
+    else:
+        bb=bd[0]-offsetX
+    if bd[1]>0:
+        bc=bd[1]+offsetY
+    else:
+        bc=bd[1]-offsetY
+    
     #获取图片在屏幕上的坐标
     # 计算出需要行走的像素
     #生成人物行走的代码
@@ -23,8 +34,14 @@ def charct_to_pic(point,offsetX=0,offsetY=0):
 def between_distance(pointA,pointB):
     # print(parentImg,pointA)
     pa=picture.get_target_on_screen_point(pointA,0.6)
-    pb=picture.get_target_on_screen_point(pointB,0.6)
-    dm.MoveTo(pa[0],pa[1])
+    pb=picture.get_target_on_screen_point(pointB,0.8)
+    
+    if pa==False:
+        return False
+    if pb==False:
+        return False
+
+    # dm.MoveTo(pa[0],pa[1])
     mx=pb[0]-pa[0]
     my=pa[1]-pb[1]#x的y的计算顺序是相反的
     print(mx,my)
@@ -65,4 +82,4 @@ def move_y(value):
         time.sleep(abs(value /move_on_milY)/1000)
         dm.keyUp(40) 
 
-charct_to_pic('./temp_screen/moveToB.jpg',-200)
+# charct_to_pic('./temp_screen/moveToB.jpg',-200)

@@ -52,7 +52,10 @@ def get_target_on_screen_point(Target,value):
     for pt in zip(*loc[::-1]):
         result=pt
     
-    return result
+    if result=='':
+        return False
+    else:
+        return result
 
 def match_multiple(img_gray,Target,value=0.8):
     template = cv2.imread(Target,0)
