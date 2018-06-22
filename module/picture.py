@@ -2,9 +2,9 @@ import cv2
 import numpy as np
 # import handle
 # 在image匹配Target，并且画一个框框标注
-def mathc_img(image,Target,value):
-    img_rgb = cv2.imread(image)
-    img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
+def mathc_img(img_rgb,Target,value):
+    img_rgb = np.array(img_rgb)
+    img_gray = cv2.cvtColor(np.array(img_rgb), cv2.COLOR_BGR2GRAY)
     template = cv2.imread(Target,0)
     w, h = template.shape[::-1]
     # w=int(w*2.5)
@@ -13,7 +13,7 @@ def mathc_img(image,Target,value):
     threshold = value
     loc = np.where( res >= threshold)
     for pt in zip(*loc[::-1]):
-        cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (7,249,151),1)
+        cv2.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (7,249,151),3)
 
     # cv2.imshow('Detected',img_rgb)
     cv2.namedWindow("output", cv2.WINDOW_NORMAL) 
@@ -39,9 +39,10 @@ def get_point(image,Target,value):
     return result
 
 import pyautogui
-def get_target_on_screen_point(Target,value):
-    image = pyautogui.screenshot()
-    img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
+def get_target_on_screen_point(img_gray,Target,value):
+    # image = pyautogui.screenshot()
+    # img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
+    # print(Target)
     template = cv2.imread(Target,0)
     w, h = template.shape[::-1]
     res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
@@ -58,7 +59,9 @@ def get_target_on_screen_point(Target,value):
         return result
 
 def match_multiple(img_gray,Target,value=0.8):
+    # print(Target)
     template = cv2.imread(Target,0)
+    # print(template)
     w, h = template.shape[::-1]
     res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
     threshold = value
@@ -73,18 +76,20 @@ def match_multiple(img_gray,Target,value=0.8):
     else:
         return result
     
-def get_image_gray():
-    image = pyautogui.screenshot()
+def get_image_gray(region=(0,0, 820*2.5, 620*2.5)):
+    # print(region)
+    image = pyautogui.screenshot(region=region)
     img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
+    # img_gray=np.array(image)
     return img_gray
 
 def test():
-    image = pyautogui.screenshot()
-    img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
-    m2=match_multiple(img_gray,'../script/map1/img/pick_map_stage_add.jpg',0.6)
-    print(m2)
+    image = pyautogui.screenshot(region=(0,0, 800*2.5, 500*2.5))
+    # img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
+    m2=mathc_img(image,'../script/map1/img/pick18.jpg',0.8)
+    
 
-
+# test()
 # test()
 # import datetime
 # print(datetime.datetime.now())
@@ -109,5 +114,5 @@ def test():
 # Target=('test_2_b.jpg')
 # value=0.4
 
-# print(get_target_on_screen_point('./temp_screen/pointA.jpg',0.6))
+# print(get_target_on_screen_point('../script/map1/img/common_p1.jpg',0.9))
 # print(get_point(image,Target,value))
