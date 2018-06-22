@@ -84,12 +84,12 @@ def get_image_gray(region=(0,0, 820*2.5, 620*2.5)):
     return img_gray
 
 def test():
-    image = pyautogui.screenshot(region=(0,0, 800*2.5, 500*2.5))
+    image = pyautogui.screenshot(region=(0,0, 800, 500))
     # img_gray = cv2.cvtColor(np.array(image), cv2.COLOR_BGR2GRAY)
-    m2=mathc_img(image,'../script/map1/img/pick18.jpg',0.8)
+    m2=mathc_img(image,'../script/map1/img/map1_b_1.jpg',0.8)
     
 
-# test()
+test()
 # test()
 # import datetime
 # print(datetime.datetime.now())
